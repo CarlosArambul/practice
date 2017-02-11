@@ -2,9 +2,9 @@ package feb11;
 
 public class BinaryTree {
 
-	private BinaryTree left;
-	private BinaryTree right;
-	private int value;
+	public BinaryTree left;
+	public BinaryTree right;
+	public int value;
 	
 	BinaryTree(int initialValue){
 		this.value = initialValue;
@@ -49,6 +49,47 @@ public class BinaryTree {
 		if (right != null) {
 			right.printPreOrder();
 		}
+	}
+	
+	public int getHeight() {
+		int rightHeight = 0;
+		if (right != null) {
+			rightHeight = right.getHeight() + 1;
+		}
+		
+		int leftHeight = 0;
+		if (left != null) {
+			leftHeight = left.getHeight() + 1;
+		}
+		
+		return rightHeight > leftHeight ? rightHeight: leftHeight;
+		
+	}
+	
+	public boolean isHeightBalanaced(){
+		
+		int leftHeight = -1;
+		if (left != null){
+			leftHeight = left.getHeight();
+		}
+		int rightHeight = -1;
+		if (right != null){
+			rightHeight = right.getHeight();
+		}
+		
+		if (Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+		
+		if (left != null && !left.isHeightBalanaced()) {
+			return false;
+		}
+		
+		if (right != null && !right.isHeightBalanaced()) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	
